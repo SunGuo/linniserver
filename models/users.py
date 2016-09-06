@@ -3,9 +3,11 @@
 from flask import Flask
 from flask_sqlalchemy  import SQLAlchemy
 from datetime import datetime
+import os
 
+PATH1 = os.getcwd()
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////Users/guoxian1/linni/test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///%s/test.db' % PATH1
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
