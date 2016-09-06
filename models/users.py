@@ -15,14 +15,16 @@ db = SQLAlchemy(app)
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(80), unique = True)
-    email = db.Column(db.String(120), unique = True)
+    email = db.Column(db.String(120))
     phonenum = db.Column(db.String(20), unique = True)
+    passwd = db.Column(db.String(50))
     create_date = db.Column(db.DateTime)
 
-    def __init__(self, username, email, phonenum, create_date = None):
+    def __init__(self, username, phonenum, email = None, passwd = None, create_date = None):
         self.username = username
         self.email = email
         self.phonenum = phonenum
+        self.passwd = passwd
         if create_date is None:
             create_date = datetime.utcnow()
 

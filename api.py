@@ -13,6 +13,9 @@ TODOS = {
  'todo3' : {'task' : 'profit'}
 }
 
+def test():
+    pass
+
 def abort_if_todo_doesnt_exist(todo_id):
     if todo_id not in TODOS:
         abort(404, message = "Todo {} doest`t exist".format(todo_id))
@@ -53,9 +56,35 @@ class users_action(Resource):
         users1 = users.User.query.all()
         return jsonify(users = [u1.to_json() for u1 in users1])
 
+class user_login(Resource):
+    def get(self, username):
+        users1 = users.User.query.filter_by(username = username).first()
+        if users1 is not None:
+            return {'flag': True}
+        else:
+            return {'flag': False}
+
+    def put(self):
+        pass
+
+
+class user_register(Resource):
+    def put(self, phonenum, pwd):
+        try:
+            user = users.User(username = phonenum, phonenum = phonenum, pwd)
+            users.db.session.add(user)
+            users.db.session.commit()
+            return {'flag' : True}
+        except Exception, e:
+            return {'flag' : False}
+
+
+
 api.add_resource(todo_list, '/todos')
 api.add_resource(todo, '/todos/<todo_id>')
 api.add_resource(users_action, '/users')
+api.add_resource(user_login, '/users/<username>')
+api.add_resource(user_register, '/users/')
 
 #api.add_resource(helloworld, '/')
 
