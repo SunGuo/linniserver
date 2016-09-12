@@ -19,6 +19,9 @@ class User(db.Model):
     username = db.Column(db.String(80), unique = True)
     email = db.Column(db.String(120), unique = True)
     phonenum = db.Column(db.String(20), unique = True)
+    company = db.Column(db.String(40))
+    position = db.Column(db.String(80))
+    stars = db.Columns(db.Integer)
     create_date = db.Column(db.DateTime)
 
     def __init__(self, username, email, phonenum, create_date = None):
@@ -166,7 +169,51 @@ class userLocation(db.Model):
             'locationId' : self.locationId,
         }
 
+class keyWord(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    keyWordName = db.Column(db.String(50))
+
+    def __init__(self, keyWordName):
+        self.keyWordName = keyWordName
+    
+    def __repr__(self):
+        return "<keyWordName : %r, keyWordName ： %r>" % (self.keyWordName)
+    
+    def to_json(self):
+        return {
+            'id' : self.id, 
+            'keyWordName' : self.keyWordName,
+        }
 
 
-  
+class userKeyWord(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    userId = db.Column(db.Integer)
+    keyWordId = db.Column(db.Integer)
+    kwExperience = db.Column(db.Integer)
+    kwquality = db.Column(db.String(20))
+
+   def __init__(self, userId, keyWordId, kwExperience, kwquality):
+        self.userId = userId
+        self.keyWordId = keyWordId
+        self.kwExperience = kwExperience
+        self.kwquality = kwquality
+    
+    def __repr__(self):
+        return "<userId: %r, keyWordId : %r, kwExperience ： %r,kwquality: %r >" % (self.userId, self.keyWordId, self.kwquality)
+    
+    def to_json(self):
+        return {
+            'id' : self.id, 
+            'userId' : self.userId,
+            'keyWordId' : self.keyWordId,
+            'kwExperience' : self.kwExperience,
+            'kwquality' :  self.kwquality,
+        }
+
+
+ 
+
+
+
 
