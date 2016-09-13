@@ -147,7 +147,7 @@ class location(db.Model):
             'province' : self.province,
             'city' : self.city,
         }
- 
+
 
 class userLocation(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -177,8 +177,7 @@ class keyWord(db.Model):
         self.keyWordName = keyWordName
     
     def __repr__(self):
-        return "<keyWordName : %r, keyWordName ： %r>" % (self.keyWordName)
-    
+        return "<keyWordName : %r, keyWordName ： %r>" % (self.keyWordName   
     def to_json(self):
         return {
             'id' : self.id, 
@@ -211,8 +210,6 @@ class userKeyWord(db.Model):
             'kwquality' :  self.kwquality,
         }
 
-
- 
 
 
 
