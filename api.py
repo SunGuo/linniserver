@@ -1,5 +1,6 @@
 #-*-coding:utf8 -*-
 
+
 from flask import Flask,request, jsonify
 from flask_restful import reqparse, abort, Api, Resource
 from models import users
@@ -12,6 +13,9 @@ TODOS = {
  'todo2' : {'task' :  '????'},
  'todo3' : {'task' : 'profit'}
 }
+
+def test():
+    pass
 
 def abort_if_todo_doesnt_exist(todo_id):
     if todo_id not in TODOS:
